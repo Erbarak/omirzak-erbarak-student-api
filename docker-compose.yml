@@ -1,0 +1,41 @@
+name: omirzak-erbarak-student-api
+
+services:
+  app:
+    build: .
+    image: omirzak-erbarak-student-api:v1.0-omirzak-erbarak-37403
+    container_name: omirzak-erbarak-app
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/studentdb
+      DB_USER: student
+      DB_PASSWORD: student_pass
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - student-net
+
+  db:
+    image: postgres:16
+    container_name: omirzak-erbarak-db
+    environment:
+      POSTGRES_DB: studentdb
+      POSTGRES_USER: student
+      POSTGRES_PASSWORD: student_pass
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U student -d studentdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - student-net
+
+volumes:
+  pgdata:
+
+networks:
+  student-net:
