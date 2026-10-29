@@ -1,3 +1,3 @@
 # Erbarak Omirzak Student API
-Author: Erbarak Omirzak (ID 37403)
+Author: Erbarak Omirzak - documentation branch
 Change: added CRUD endpoints for students
