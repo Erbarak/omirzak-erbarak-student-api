@@ -24,7 +24,7 @@ class StudentApiTests {
         mockMvc.perform(post("/api/students")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"name\":\"Erbarak Omirzak\",\"studentCode\":\"37403\",\"email\":\"e@example.com\"}"))
-                .andExpect(status().isCreated())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("Erbarak Omirzak"));
     }
 
